@@ -19,6 +19,7 @@ always @(posedge clk) begin
     if (!rstn) begin
         addr <= 0;
         tx_valid <= 0;
+        dout <= 0;
     end
     else if (rx_valid) begin
         case (din[9:8])
