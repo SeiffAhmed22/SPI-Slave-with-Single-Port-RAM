@@ -123,23 +123,31 @@ Connects the **SPI Slave** and **RAM** modules.
 ---
 
 ## **📌 UVM-Based Verification**
+## **📌 UVM-Based Verification**
 The SPI Slave and RAM were **verified using UVM**, which includes:
+
 - **UVM Testbench Architecture**
   - `SPI_env.sv` → UVM Environment
-  - `SPI_test.sv` → Testbench
-  - `SPI_agent.sv` → Agent with Sequencer, Driver, and Monitor
+  - `SPI_test.sv` → UVM Testbench
+  - `SPI_agent.sv` → UVM Agent containing:
   - `SPI_sequencer.sv` → Generates sequences
-  - `SPI_driver.sv` → Drives stimulus
-  - `SPI_monitor.sv` → Observes transactions
-  - `SPI_scoreboard.sv` → Compares actual vs expected results
-  - `SPI_coverage.sv` → Functional coverage
+  - `SPI_driver.sv` → Drives stimulus to DUT
+  - `SPI_monitor.sv` → Observes and collects transactions
+  - `SPI_sequence.sv` → Defines test sequences for different SPI operations
+  - `SPI_seq_item.sv` → Defines transaction-level items for SPI communication
+  - `SPI_config.sv` → Configuration settings for SPI testbench
+  - `SPI_if.sv` → UVM Interface to connect DUT with the UVM testbench
+  - `SPI_scoreboard.sv` → Compares actual DUT output with expected results
+  - `SPI_coverage.sv` → Defines and monitors functional coverage metrics
+
+This structured testbench ensures **robust verification** of the SPI Slave with Single-Port RAM using **random and directed tests**.
 
 ---
 
 ## **📌 Getting Started**
 ### **1️⃣ Running the Simulation**
-A **`SPI_do.do`** file automates compilation and simulation.
+A **`SPI.do`** file automates compilation and simulation.
 
 **Run the following command in the simulator console:**
 ```tcl
-do SPI_do.do
+do SPI.do
