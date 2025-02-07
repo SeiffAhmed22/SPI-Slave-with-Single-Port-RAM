@@ -28,12 +28,7 @@ package SPI_monitor_pkg;
                 seq_item.rst_n = SPI_vif.rst_n;
                 seq_item.MISO = SPI_vif.MISO;
                 seq_item.MOSI = SPI_vif.MOSI;
-
-                for (int i = 9; i >= 0; i--) begin
-                    seq_item.data_to_send[i] = SPI_vif.MOSI;
-                    @(negedge SPI_vif.clk);
-                end
-
+                seq_item.data_to_send.push_back(SPI_vif.MOSI);
                 mon_ap.write(seq_item);
                 `uvm_info("run_phase", seq_item.convert2string(), UVM_HIGH)
             end

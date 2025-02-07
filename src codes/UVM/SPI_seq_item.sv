@@ -15,14 +15,15 @@ package SPI_seq_item_pkg;
         logic MISO;
 
         // Data field for SPI transactions
-        rand bit [9:0] data_to_send; // Full SPI frame
+        bit data_to_send[$];
+        rand bit [9:0] full_data; // Full SPI frame
 
         // Static variable to enforce transitions: 00 → 01 → 10 → 11
         static bit [1:0] command_bits = 2'b00;
 
-        constraint data_con {
-            data_to_send[9:8] == command_bits;  // Enforce sequential transition
-            data_to_send[7:0] inside {[8'h00 : 8'hFF]}; // Randomized LSBs
+        constraint full_data_con {
+            full_data[9:8] == command_bits;  // Enforce sequential transition
+            full_data[7:0] inside {[8'h00 : 8'hFF]}; // Randomized LSBs
         }
 
         function new(string name = "SPI_seq_item");

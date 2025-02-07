@@ -120,9 +120,9 @@ module SPI #(
                     if(!SS_n) begin
                         if(counter1 == 10) begin
                             if(tx_valid) begin
-                                if(counter2 != 0) begin
+                                if(counter2 >= 0) begin
                                     counter2 <= counter2 - 1;
-                                    MISO <= rx_data[counter2];
+                                    MISO <= tx_data[counter2];
                                 end
                             end
                         end
